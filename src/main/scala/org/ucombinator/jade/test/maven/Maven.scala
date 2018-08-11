@@ -1,43 +1,19 @@
-package org.ucombinator.jade
+package org.ucombinator.jade.test.maven
 
-import scala.collection.JavaConverters._
 import java.io.File
 import java.net.{URI, URLEncoder}
 
-import org.apache.maven.wagon.Wagon
-import org.codehaus.plexus.DefaultContainerConfiguration
-import org.codehaus.plexus.DefaultPlexusContainer
-import org.codehaus.plexus.PlexusConstants
-import org.apache.maven.index.Indexer
-import org.apache.maven.index.updater.IndexUpdater
-import org.apache.maven.index.context.{IndexCreator, IndexUtils, IndexingContext}
-import org.apache.maven.index.updater.IndexUpdateRequest
-import org.apache.maven.index.updater.IndexUpdateResult
-import org.apache.maven.index.updater.ResourceFetcher
-import org.apache.maven.index.updater.WagonHelper
-
-import org.apache.maven.wagon.observers.AbstractTransferListener
-import org.apache.maven.wagon.events.TransferEvent
-import org.apache.lucene.index.IndexReader
 import org.apache.lucene.index.MultiFields
-import org.apache.lucene.search.IndexSearcher
-import org.apache.lucene.util.Bits
-import org.apache.maven.index.ArtifactInfo
+import org.apache.maven.index.Indexer
+import org.apache.maven.index.context.{IndexCreator, IndexUtils, IndexingContext}
 import org.apache.maven.index.creator.MinimalArtifactInfoIndexCreator
+import org.apache.maven.index.updater.{IndexUpdateRequest, IndexUpdater, WagonHelper}
+import org.apache.maven.wagon.Wagon
+import org.apache.maven.wagon.events.TransferEvent
+import org.apache.maven.wagon.observers.AbstractTransferListener
+import org.codehaus.plexus.{DefaultContainerConfiguration, DefaultPlexusContainer, PlexusConstants}
 
-
-/*
-import org.apache.maven.artifact.handler.{ArtifactHandler, DefaultArtifactHandler}
-import org.apache.maven.artifact.metadata.ArtifactMetadataSource
-import org.apache.maven.artifact.{Artifact, DefaultArtifact}
-import org.apache.maven.artifact.repository.{ArtifactRepository, ArtifactRepositoryPolicy, DefaultRepositoryRequest, MavenArtifactRepository}
-import org.apache.maven.artifact.repository.layout.{ArtifactRepositoryLayout, DefaultRepositoryLayout}
-import org.apache.maven.artifact.repository.metadata.{AbstractRepositoryMetadata, ArtifactRepositoryMetadata, Versioning}
-import org.apache.maven.artifact.versioning.VersionRange
-import org.apache.maven.project.artifact.DefaultMetadataSource
-import org.codehaus.plexus.{ContainerConfiguration, DefaultPlexusContainer}
-import org.eclipse.aether.metadata.DefaultMetadata
-*/
+import scala.collection.JavaConverters._
 
 object Maven {
   val config = {

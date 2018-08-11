@@ -7,6 +7,7 @@ import java.util.jar.{JarEntry, JarFile}
 import scala.collection.JavaConverters._
 import org.apache.commons.io.FileUtils
 import org.rogach.scallop.{ScallopConf, ScallopOption}
+import org.ucombinator.jade.test.maven.Maven
 
 object Main extends App {
   val conf: Main = new Main(this.args)
