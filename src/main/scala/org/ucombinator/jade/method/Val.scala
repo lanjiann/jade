@@ -1,7 +1,7 @@
 package org.ucombinator.jade.method
 
-import org.ucombinator.jade.jvm.classfile.descriptor.Descriptor
 import org.ucombinator.jade.jvm.classfile.descriptor.Descriptor.FieldDescriptor
+
 
 trait Val
 

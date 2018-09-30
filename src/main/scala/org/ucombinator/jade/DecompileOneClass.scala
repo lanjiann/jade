@@ -5,7 +5,6 @@ import org.objectweb.asm.tree._
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable
-import java.nio.file.{Files, NoSuchFileException, Paths}
 
 
 object DecompileOneClass {
@@ -16,6 +15,7 @@ object DecompileOneClass {
     // TODO (CONTINUE): "java.lang.Runnable" and "java.util.HashMap"
     // TODO (CONTINUE): try other cases later
 
+//    import java.nio.file.{Files, NoSuchFileException, Paths}
 //    val path = {
 //      try {
 //        Paths.get("C:\\Users\\lanjian\\__Research__\\Decompiler\\JavaDecompiler\\jade\\src\\test\\resources\\HashMap.class")

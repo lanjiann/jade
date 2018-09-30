@@ -19,7 +19,7 @@ trait TModuleFlag extends TAccessFlag
 sealed abstract class AccessFlag extends TAccessFlag
 
 case object ACC_PUBLIC extends AccessFlag
-    with TClassFlag with TFieldFlag with TMethodFlag with TNestedClassFlag {
+  with TClassFlag with TFieldFlag with TMethodFlag with TNestedClassFlag {
   val hasKeyword = true
   val keyword = Some("public")
   val code = 0x0001
@@ -27,7 +27,7 @@ case object ACC_PUBLIC extends AccessFlag
 }
 
 case object ACC_PRIVATE extends AccessFlag
-    with TClassFlag with TFieldFlag with TMethodFlag with TNestedClassFlag {
+  with TClassFlag with TFieldFlag with TMethodFlag with TNestedClassFlag {
   val hasKeyword = true
   val keyword = Some("private")
   val code = 0x0002
@@ -35,7 +35,7 @@ case object ACC_PRIVATE extends AccessFlag
 }
 
 case object ACC_PROTECTED extends AccessFlag
-    with TClassFlag with TFieldFlag with TMethodFlag with TNestedClassFlag {
+  with TClassFlag with TFieldFlag with TMethodFlag with TNestedClassFlag {
   val hasKeyword = true
   val keyword = Some("protected")
   val code = 0x0004
@@ -43,7 +43,7 @@ case object ACC_PROTECTED extends AccessFlag
 }
 
 case object ACC_STATIC extends AccessFlag
-    with TFieldFlag with TMethodFlag with TNestedClassFlag {
+  with TFieldFlag with TMethodFlag with TNestedClassFlag {
   val hasKeyword = true
   val keyword = Some("static")
   val code = 0x0008
@@ -51,7 +51,7 @@ case object ACC_STATIC extends AccessFlag
 }
 
 case object ACC_FINAL extends AccessFlag
-    with TClassFlag with TFieldFlag with TMethodFlag with TNestedClassFlag with TParameterFlag {
+  with TClassFlag with TFieldFlag with TMethodFlag with TNestedClassFlag with TParameterFlag {
   val hasKeyword = true
   val keyword = Some("final")
   val code = 0x0010
@@ -59,14 +59,14 @@ case object ACC_FINAL extends AccessFlag
 }
 
 case object ACC_SUPER extends AccessFlag
-    with TClassFlag {
+  with TClassFlag {
   val hasKeyword = false
   val keyword = Option.empty[String]
   val code = 0x0020
 }
 
 case object ACC_SYNCHRONIZED extends AccessFlag
-    with TMethodFlag {
+  with TMethodFlag {
   val hasKeyword = true
   val keyword = Some("synchronized")
   val code = 0x0020
@@ -78,7 +78,7 @@ case object ACC_SYNCHRONIZED extends AccessFlag
 //val ACC_TRANSITIVE = 0x0020; // module requires
 
 case object ACC_VOLATILE extends AccessFlag
-    with TFieldFlag {
+  with TFieldFlag {
   val hasKeyword = true
   val keyword = Some("volatile")
   val code = 0x0040
@@ -86,7 +86,7 @@ case object ACC_VOLATILE extends AccessFlag
 }
 
 case object ACC_BRIDGE extends AccessFlag
-    with TMethodFlag {
+  with TMethodFlag {
   val hasKeyword = false
   val keyword = Option.empty[String]
   val code = 0x0040
@@ -95,14 +95,14 @@ case object ACC_BRIDGE extends AccessFlag
 //val ACC_STATIC_PHASE = 0x0040; // module requires
 
 case object ACC_VARARGS extends AccessFlag
-    with TMethodFlag {
+  with TMethodFlag {
   val hasKeyword = false
   val keyword = Option.empty[String]
   val code = 0x0080
 }
 
 case object ACC_TRANSIENT extends AccessFlag
-    with TFieldFlag {
+  with TFieldFlag {
   val hasKeyword = true
   val keyword = Some("transient")
   val code = 0x0080
@@ -110,7 +110,7 @@ case object ACC_TRANSIENT extends AccessFlag
 }
 
 case object ACC_NATIVE extends AccessFlag
-    with TMethodFlag {
+  with TMethodFlag {
   val hasKeyword = true
   val keyword = Some("native")
   val code = 0x0100
@@ -118,7 +118,7 @@ case object ACC_NATIVE extends AccessFlag
 }
 
 case object ACC_INTERFACE extends AccessFlag
-    with TClassFlag with TNestedClassFlag {
+  with TClassFlag with TNestedClassFlag {
   val hasKeyword = true
   val keyword = Some("interface")  // TODO: ??? From the specification, an interface also need acc_abstract flag??? page 68 JVM 8
   val code = 0x0200
@@ -126,7 +126,7 @@ case object ACC_INTERFACE extends AccessFlag
 }
 
 case object ACC_ABSTRACT extends AccessFlag
-    with TClassFlag with TMethodFlag with TNestedClassFlag {
+  with TClassFlag with TMethodFlag with TNestedClassFlag {
   val hasKeyword = true
   val keyword = Some("abstract")  // TODO: also used to mark `interface`
   val code = 0x0400
@@ -134,39 +134,39 @@ case object ACC_ABSTRACT extends AccessFlag
 }
 
 case object ACC_STRICT extends AccessFlag
-    with TMethodFlag {
+  with TMethodFlag {
   val hasKeyword = true
   val keyword = Some("strictfp")
   val code = 0x0800
   override val rank = 7
-  }
+}
 
 // class, field, method, parameter, module *
 case object ACC_SYNTHETIC extends AccessFlag
-    with TClassFlag with TFieldFlag with TMethodFlag with TNestedClassFlag
-    with TParameterFlag with TModuleFlag {
+  with TClassFlag with TFieldFlag with TMethodFlag with TNestedClassFlag
+  with TParameterFlag with TModuleFlag {
   val hasKeyword = false
   val keyword = Option.empty[String]
   val code = 0x1000
 }
 
 case object ACC_ANNOTATION extends AccessFlag
-    with TClassFlag with TNestedClassFlag {
+  with TClassFlag with TNestedClassFlag {
   val hasKeyword = true // TODO: ???
   val keyword = Some("@") // TODO: ???
   val code = 0x2000
 }
 
 case object ACC_ENUM extends AccessFlag
-    with TClassFlag with TFieldFlag with TNestedClassFlag {  // class(?) field inner
+  with TClassFlag with TFieldFlag with TNestedClassFlag {  // class(?) field inner
   val hasKeyword = true
   val keyword = Some("enum")
   val code = 0x4000
-  }
+}
 
 case object ACC_MANDATED extends AccessFlag
-    with TParameterFlag with TModuleFlag {  // parameter, module, module * TODO: what is "module *"
-val hasKeyword = false
+  with TParameterFlag with TModuleFlag {  // parameter, module, module * TODO: what is "module *"
+  val hasKeyword = false
   val keyword = Option.empty[String]  // TODO:
   val code = 0x8000
 }
@@ -182,15 +182,15 @@ val hasKeyword = false
 //    val ACC_DEPRECATED = 0x20000; // class, field, method
 
 object AccessFlag {
-//  public protected private abstract static final transient volatile synchronized native strictfp interface
+  //  public protected private abstract static final transient volatile synchronized native strictfp interface
   private def extractAccessFlags(access: Int, flags: Map[Int, TAccessFlag])
-    : List[String] = flags
-      .keySet
-      .withFilter(f => (f & access) != 0)
-      .map(flags)
-      .toList
-      .sortBy(_.rank)
-      .flatMap(_.keyword)
+  : List[String] = flags
+    .keySet
+    .withFilter(f => (f & access) != 0)
+    .map(flags)
+    .toList
+    .sortBy(_.rank)
+    .flatMap(_.keyword)
 
   private val classFlags = HashMap[Int, TClassFlag](
     0x0001 -> ACC_PUBLIC,      // Declared public; may be accessed from outside its package.
@@ -254,16 +254,16 @@ object AccessFlag {
     extractAccessFlags(access, methodFlags)
 
   private val nestedClassFlags = HashMap[Int, TNestedClassFlag](
-        0x0001 -> ACC_PUBLIC,      // Marked or implicitly public in source.
-        0x0002 -> ACC_PRIVATE,     // Marked private in source.
-        0x0004 -> ACC_PROTECTED,   // Marked protected in source.
-        0x0008 -> ACC_STATIC,      // Marked or implicitly static in source.
-        0x0010 -> ACC_FINAL,       // Marked final in source.
-        0x0200 -> ACC_INTERFACE,   // Was an interface in source.
-        0x0400 -> ACC_ABSTRACT,    // Marked or implicitly abstract in source.
-        0x1000 -> ACC_SYNTHETIC,   // Declared synthetic; not present in the source code.
-        0x2000 -> ACC_ANNOTATION,  // Declared as an annotation type.
-        0x4000 -> ACC_ENUM,        // Declared as an enum type.
+    0x0001 -> ACC_PUBLIC,      // Marked or implicitly public in source.
+    0x0002 -> ACC_PRIVATE,     // Marked private in source.
+    0x0004 -> ACC_PROTECTED,   // Marked protected in source.
+    0x0008 -> ACC_STATIC,      // Marked or implicitly static in source.
+    0x0010 -> ACC_FINAL,       // Marked final in source.
+    0x0200 -> ACC_INTERFACE,   // Was an interface in source.
+    0x0400 -> ACC_ABSTRACT,    // Marked or implicitly abstract in source.
+    0x1000 -> ACC_SYNTHETIC,   // Declared synthetic; not present in the source code.
+    0x2000 -> ACC_ANNOTATION,  // Declared as an annotation type.
+    0x4000 -> ACC_ENUM,        // Declared as an enum type.
   )
 
   def extractNestedClassAccessFlags(access: Int): List[String] =

@@ -1,6 +1,5 @@
 package org.ucombinator.jade
 
-import org.jgrapht.graph.DefaultDirectedGraph
 import org.jgrapht.{Graph, Graphs}
 
 import scala.collection.immutable
