@@ -46,7 +46,6 @@ lazy val core = project
         "org.jgrapht" % "jgrapht-ext"  % jgraphtVersion,
         "org.jgrapht" % "jgrapht-io"   % jgraphtVersion,
 
-        // NOTE: 3.5.2 has self conflicts in its own dependencies
         "org.apache.maven" % "maven-core"                   % "3.5.4",
         "org.apache.maven" % "maven-compat"                 % "3.5.4",
         "org.apache.maven.indexer" % "indexer-core"         % "6.0.0",
@@ -58,7 +57,13 @@ lazy val core = project
         "org.apache.lucene" % "lucene-highlighter"      % luceneVersion,
         "org.apache.lucene" % "lucene-backward-codecs"  % luceneVersion
       )
-    }
+    },
+
+    dependencyOverrides ++= Seq(
+      // Deal with version conflicts in library dependencies
+      "com.google.guava"    % "guava"        % "26.0-jre",
+      "org.codehaus.plexus" % "plexus-utils" % "3.1.0",
+    )
   )
 
 lazy val maven = project
@@ -70,11 +75,6 @@ lazy val maven = project
       val luceneVersion    = "5.5.5" // For the compatibility with org.apache.maven.indexer:indexer-core:6.0.0
 
       Seq(
-        // Deal with version conflicts in library dependencies
-        "com.google.inject"   % "guice"        % "4.2.1",
-        "com.google.guava"    % "guava"        % "26.0-jre",
-        "org.codehaus.plexus" % "plexus-utils" % "3.1.0",
-
         // NOTE: 3.5.2 has self conflicts in its own dependencies
         "org.apache.maven" % "maven-core"                   % "3.5.4",
         "org.apache.maven" % "maven-compat"                 % "3.5.4",
@@ -87,7 +87,13 @@ lazy val maven = project
         "org.apache.lucene" % "lucene-highlighter"      % luceneVersion,
         "org.apache.lucene" % "lucene-backward-codecs"  % luceneVersion
       )
-    }
+    },
+
+    dependencyOverrides ++= Seq(
+      // Deal with version conflicts in library dependencies
+      "com.google.guava"    % "guava"        % "26.0-jre",
+      "org.codehaus.plexus" % "plexus-utils" % "3.1.0",
+    )
   )
 
 lazy val cli = project
@@ -97,7 +103,13 @@ lazy val cli = project
     assemblyOutputPath in assembly := new File(s"lib/jade/cli.jar"),
     libraryDependencies ++= commonDependencies ++ Seq(
       "org.rogach" %% "scallop"   % "3.1.3",
-      "commons-io" % "commons-io" % "2.6"
+      "commons-io" % "commons-io" % "2.5"
+    ),
+
+    dependencyOverrides ++= Seq(
+      // Deal with version conflicts in library dependencies
+      "com.google.guava"    % "guava"        % "26.0-jre",
+      "org.codehaus.plexus" % "plexus-utils" % "3.1.0",
     )
   ).dependsOn(
   core,
